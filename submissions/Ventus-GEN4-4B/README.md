@@ -12,7 +12,7 @@
 | JevBench Hard (111) | 74 / 111 (66.67%) |
 | JevBench Standard (72) | 71 / 72 (98.61%) |
 | WebArena Navigation | 88.61% (4,793 / 5,409) with 0% Premature DONE |
-| Universal Knowledge (1,218) | 994 / 1,218 (81.61%) |
+| Jev Decision Index 0.3 | 140,178 scoreable requests (`scores.json` & `results.jsonl.gz`) |
 | Model Repository | [Ethan33X/Ventus-GEN4-4B](https://huggingface.co/Ethan33X/Ventus-GEN4-4B) |
 | Inference Code | [XieShaocong33Ethan/Ventus-GEN4-4B](https://github.com/XieShaocong33Ethan/Ventus-GEN4-4B) |
 | Standalone Quickstart | `quickstart.py` in repository root |
@@ -22,6 +22,26 @@
 - Load directly via Hugging Face `AutoModelForCausalLM.from_pretrained("Ethan33X/Ventus-GEN4-4B", torch_dtype=torch.bfloat16, device_map="auto")`.
 - Candidate option probabilities are evaluated in a single forward pass over candidate option keys (e.g. A, B, C, D) using native chat templates.
 - Native forward pass latency is ~38.5 ms on GPU, well within the Decision Index <1,000 ms SLA requirement on RTX PRO 6000 Ada.
+
+## Evaluation & Reproduction
+
+To evaluate using the official `decision-index` reproduction toolkit:
+
+```bash
+# 1. Run evaluation with native ventus engine
+decision-index run ventus \
+  --engine-opt model=Ethan33X/Ventus-GEN4-4B \
+  --edition 0.3 \
+  --suite-dir suite-0.3 \
+  --out runs/Ventus-GEN4-4B
+
+# 2. Score results and generate Decision Index metrics
+decision-index score \
+  --edition 0.3 \
+  --suite-dir suite-0.3 \
+  --results runs/Ventus-GEN4-4B/results.jsonl \
+  --out runs/Ventus-GEN4-4B
+```
 
 ## Declared Limits
 
