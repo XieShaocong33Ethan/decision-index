@@ -11,10 +11,21 @@
 | JevBench 231 Total | 176 / 231 (76.19%) [Tied #2 Sub-2B Tier Globally] |
 | JevBench Hard (111) | 58 / 111 (52.25%) |
 | JevBench Standard (72) | 70 / 72 (97.22%) [All-Time Record in Sub-2B Tier] |
-| Jev Decision Index 0.3 | 140,178 scoreable requests (`scores.json` & `results.jsonl.gz`) |
+| Jev Decision Index 0.3 | **13.90** (Raw: 34.24%, 140,178 / 140,178, 100.0% Complete) [[HF Dataset]](https://huggingface.co/datasets/Ethan33X/ventus-gen4-decision-index/tree/main/Ventus-GEN4-2B) |
 | Model Repository | [Ethan33X/Ventus-GEN4-2B](https://huggingface.co/Ethan33X/Ventus-GEN4-2B) |
 | Inference Code | [XieShaocong33Ethan/Ventus-GEN4-2B](https://github.com/XieShaocong33Ethan/Ventus-GEN4-2B) |
 | Standalone Quickstart | `quickstart.py` in repository root |
+
+## Decision Index 0.3 Area Breakdown
+
+| Area | Chance-Corrected Skill | Raw Accuracy | Coverage | Benchmark Count |
+|---|---:|---:|---:|---:|
+| Tools & Automation | **24.87%** | 33.25% | 100.0% | 4 |
+| Language Understanding | **18.41%** | 41.77% | 100.0% | 12 |
+| Knowledge & Reasoning | **11.30%** | 33.29% | 100.0% | 11 |
+| Arts & Human Taste | **6.79%** | 37.64% | 100.0% | 3 |
+| Retrieval & Classification | **4.98%** | 24.96% | 100.0% | 7 |
+| **Overall Decision Index 0.3** | **13.90** | **34.24%** | **100.0% (140,178 / 140,178)** | **37** |
 
 ## Inference Specification
 
