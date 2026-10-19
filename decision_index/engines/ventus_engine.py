@@ -80,10 +80,12 @@ class VentusEngine(Engine):
     name = "ventus"
     latency = "Device-synchronized in-process forward wall time via direct causal option logits; excludes model loading."
 
-    def __init__(self, model="/root/autodl-tmp/models/Ventus-2B", revision=None, device=None, dtype="bfloat16", max_tokens=32768, **options):
+    def __init__(self, model="/root/autodl-tmp/models/Ventus-2B", revision=None, device=None, dtype="bfloat16", max_tokens=32768, length_norm=True, length_penalty=1.0, **options):
         super().__init__(**options)
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.dtype = getattr(torch, dtype) if isinstance(dtype, str) else dtype
+        self.length_norm = length_norm
+        self.length_penalty = float(length_penalty)
         import os
         full_state_path = os.path.join(model, "full_model_state.pt") if os.path.isdir(model) else model
         if os.path.exists(full_state_path) and full_state_path.endswith(".pt"):
@@ -111,7 +113,9 @@ class VentusEngine(Engine):
             "revision": revision or getattr(self.model.config, "_commit_hash", None),
             "device": self.device,
             "dtype": str(dtype),
-            "policy": "Every question is scored in a single causal forward pass via direct option-letter logits using standard Hugging Face AutoModelForCausalLM; probabilities are the softmax over candidate option keys.",
+            "length_norm": self.length_norm,
+            "length_penalty": self.length_penalty,
+            "policy": "Every question is scored in a single causal forward pass via direct option-letter logits using standard Hugging Face AutoModelForCausalLM with length-normalized log-likelihood; probabilities are the softmax over candidate option keys.",
         }
 
     def runtime(self):
@@ -201,6 +205,8 @@ class VentusEngine(Engine):
                         lp_mat = pref_lp[u]
                         for i in range(len(u)):
                             s += lp_mat[i, t[i + 1]].item()
+                    if self.length_norm:
+                        s = s / (len(t) ** self.length_penalty)
                     scores.append(s)
 
             top = max(scores)
