@@ -12,20 +12,22 @@
 | JevBench Hard (111) | 69 / 111 (62.16%) |
 | JevBench Standard (72) | 71 / 72 (98.61%) |
 | JevBench Easy (48) | 46 / 48 (95.83%) |
-| Jev Decision Index 0.3 | **41.31** (Raw: 55.56%) [[HF Dataset]](https://huggingface.co/datasets/Ethan33X/tractus-decision-index-0.3/tree/main/Tractus-decision-4B) |
+| Jev Decision Index 0.3 (`suite-0.3-probe-2.5k`) | **41.31** (Raw: 55.56%) [[HF Dataset]](https://huggingface.co/datasets/Ethan33X/tractus-decision-index-0.3/tree/main/Tractus-decision-4B) |
 | Model Repository | [Ethan33X/Tractus-decision-4B](https://huggingface.co/Ethan33X/Tractus-decision-4B) |
 | Standalone Quickstart | `quickstart.py` in repository root |
 
-## Decision Index 0.3 Area Breakdown
+## Decision Index 0.3 Area Breakdown (`suite-0.3-probe-2.5k` Stratified Probe)
 
-| Area | Chance-Corrected Skill | Raw Accuracy | Coverage | Benchmark Count |
+| Area | Chance-Corrected Skill | Raw Accuracy | Within-Probe Coverage | Benchmark Count |
 |---|---:|---:|---:|---:|
-| Tools & Automation | **53.63%** | 58.81% | 100.0% | 5 |
-| Language Understanding | **53.19%** | 67.67% | 100.0% | 9 |
-| Retrieval & Classification | **37.97%** | 53.24% | 100.0% | 6 |
-| Knowledge & Reasoning | **26.06%** | 44.01% | 100.0% | 11 |
-| Arts & Human Taste | **34.19%** | 52.87% | 100.0% | 6 |
-| **Overall Decision Index 0.3** | **41.31** | **55.56%** | **100.0% (2,199 / 2,199)** | **37** |
+| Tools & Automation | **53.63%** | 58.81% | 100.0% (257 / 257) | 5 |
+| Language Understanding | **53.19%** | 67.67% | 100.0% (391 / 391) | 9 |
+| Retrieval & Classification | **37.97%** | 53.24% | 100.0% (326 / 326) | 6 |
+| Knowledge & Reasoning | **26.06%** | 44.01% | 100.0% (678 / 678) | 11 |
+| Arts & Human Taste | **34.19%** | 52.87% | 100.0% (280 / 280) | 6 |
+| **Overall Decision Index 0.3 (`suite-0.3-probe-2.5k`)** | **41.31** | **55.56%** | **100.0% (2,172 / 2,172; `complete: false`)** | **37 indexed (+6 unindexed)** |
+
+> **Probe Provenance**: Evaluated on `suite-0.3-probe-2.5k` (`2,199` sampled requests from the `140,178`-item `release-v3` corpus, minus `27` official `excluded-questions.json` removals = `2,172` scored items across 43 catalogs: `1,932` items across 37 indexed benchmarks + `240` items across 6 unindexed reference tasks [`RouterBench=60, SGD/SGD-X=50, MMLU=40, ARC-Easy=40, ARC-Challenge=40, SimpleBench=10`]; `complete: false`). Public index weight is `20%` of the Full leaderboard composite (`80%` private tests).
 
 ## Inference Specification
 
